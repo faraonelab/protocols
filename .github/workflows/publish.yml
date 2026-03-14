@@ -34,16 +34,16 @@ jobs:
 
       - name: Render and Encrypt
         run: |
-          # Render to the 'docs' folder
+          # 1. Build the site
           quarto render
-          # Check files before encryption
-          echo "Files before encryption:"
-          ls -R docs/
-          # Encrypt in-place
-          staticrypt docs -r -o docs --short --password "${{ secrets.SITE_PASSWORD }}"
-          # Check files after encryption (Look for .html files)
-          echo "Files after encryption:"
-          ls -R docs/
+          
+          # 2. Force encryption on every HTML file found in the docs directory
+          # The --overwrite flag replaces the original file with the locked version
+          find docs -name "*.html" -exec staticrypt {} --password "${{ secrets.SITE_PASSWORD }}" --short --overwrite \;
+          
+          # 3. Verify files were actually changed
+          echo "Verification: Checking file sizes..."
+          ls -lh docs/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
