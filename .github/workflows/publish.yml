@@ -1,9 +1,7 @@
 on:
   push:
-    branches: [ main, updates ]
-  pull_request:
-    branches: [ main ]
-    
+    branches: [ main ] # Only deploy to live site when pushed to main
+
 name: Quarto Publish Encrypted
 
 jobs:
@@ -18,20 +16,20 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Install R & Dependencies
         uses: r-lib/actions/setup-renv@v2
 
-      - name: Install Node & Staticrypt
-        run: |
-          npm install -g staticrypt
+      - name: Install Staticrypt
+        run: npm install -g staticrypt
 
       - name: Render and Encrypt
         run: |
-          # 1. Build the site into the 'docs' folder
           quarto render
-          
-          # 2. Encrypt the 'docs' folder in-place
-          # This overwrites clean files with encrypted versions
           staticrypt docs -r -o docs --short --password "${{ secrets.SITE_PASSWORD }}"
 
       - name: Deploy to GitHub Pages
@@ -39,4 +37,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
-          force_orphan: true # Cleans the gh-pages branch to ensure no old files remain
+          force_orphan: true
