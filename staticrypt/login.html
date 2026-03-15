@@ -1,208 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>{{title}}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>{{title}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: linear-gradient(135deg, #0b3d91, #1b6ec2);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-      padding: 24px;
-    }
+*{box-sizing:border-box;}
 
-    .login-container {
-      background: white;
-      padding: 42px;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-      width: 420px;
-      max-width: 100%;
-      text-align: center;
-    }
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:linear-gradient(135deg,#0b3d91,#1b6ec2);
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
 
-    .logo {
-      width: 120px;
-      max-width: 100%;
-      margin-bottom: 18px;
-    }
+.login-container{
+background:white;
+padding:40px;
+border-radius:16px;
+box-shadow:0 20px 40px rgba(0,0,0,0.25);
+width:420px;
+max-width:100%;
+text-align:center;
+}
 
-    h1 {
-      margin: 10px 0 10px 0;
-      font-size: 28px;
-      color: #0b3d91;
-    }
+.logo{
+width:110px;
+margin-bottom:20px;
+}
 
-    .subtitle {
-      color: #555;
-      margin-bottom: 22px;
-      line-height: 1.45;
-      font-size: 15px;
-    }
+h1{
+margin:10px 0;
+font-size:28px;
+color:#0b3d91;
+}
 
-    .password-wrap {
-      position: relative;
-      margin-top: 10px;
-    }
+.subtitle{
+color:#555;
+margin-bottom:20px;
+line-height:1.4;
+}
 
-    input[type="password"],
-    input[type="text"] {
-      width: 100%;
-      padding: 14px 48px 14px 14px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      outline: none;
-    }
+.password-wrapper{
+position:relative;
+}
 
-    input[type="password"]:focus,
-    input[type="text"]:focus {
-      border-color: #1b6ec2;
-    }
+input{
+width:100%;
+padding:14px;
+font-size:16px;
+border-radius:8px;
+border:1px solid #ccc;
+outline:none;
+}
 
-    .toggle-password {
-      position: absolute;
-      top: 50%;
-      right: 12px;
-      transform: translateY(-50%);
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      font-size: 14px;
-      color: #1b6ec2;
-      font-weight: 600;
-      padding: 0;
-    }
+.toggle{
+position:absolute;
+right:12px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
+font-size:14px;
+color:#1b6ec2;
+}
 
-    .remember-row {
-      margin-top: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      color: #444;
-      text-align: left;
-    }
+.remember{
+margin-top:12px;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:14px;
+color:#444;
+}
 
-    .remember-row input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      margin: 0;
-      accent-color: #1b6ec2;
-    }
+button{
+margin-top:16px;
+width:100%;
+padding:14px;
+background:#1b6ec2;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
 
-    button.primary {
-      margin-top: 18px;
-      width: 100%;
-      padding: 14px;
-      background: #1b6ec2;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+button:hover{
+background:#0b3d91;
+}
 
-    button.primary:hover {
-      background: #0b3d91;
-    }
+#error{
+color:#c62828;
+margin-top:12px;
+}
 
-    #staticrypt-error {
-      color: #c62828;
-      margin-top: 14px;
-      font-size: 14px;
-      min-height: 20px;
-    }
+.footer{
+margin-top:24px;
+font-size:12px;
+color:#888;
+}
 
-    .footer {
-      margin-top: 28px;
-      font-size: 12px;
-      color: #888;
-      line-height: 1.4;
-    }
-  </style>
+</style>
 </head>
 
 <body>
-  <div class="login-container">
-    <img src="logo.png" class="logo" alt="Faraone Lab logo">
 
-    <h1>Faraone Lab Protocols</h1>
+<div class="login-container">
 
-    <p class="subtitle">
-      Internal research protocols and documentation.<br>
-      Enter the password provided by the lab.
-    </p>
+<img src="logo.png" class="logo" alt="Faraone Lab logo">
 
-    <form id="staticrypt-form">
-      <div class="password-wrap">
-        <input id="staticrypt-password" type="password" placeholder="Password" autocomplete="current-password">
-        <button type="button" class="toggle-password" id="toggle-password">Show</button>
-      </div>
+<h1>Faraone Lab Protocols</h1>
 
-      <label class="remember-row" for="remember-me">
-        <input id="remember-me" type="checkbox" checked>
-        <span>Remember this device</span>
-      </label>
+<p class="subtitle">
+Internal research protocols and documentation.<br>
+Enter the password provided by the lab.
+</p>
 
-      <button type="submit" class="primary">Access Protocols</button>
-    </form>
+<form id="staticrypt-form">
 
-    <div id="staticrypt-error"></div>
+<div class="password-wrapper">
+<input id="staticrypt-password" type="password" placeholder="Password">
+<span class="toggle" onclick="togglePassword()">Show</span>
+</div>
 
-    <div class="footer">
-      Faraone Lab &amp; CTRIC
-    </div>
-  </div>
+<div class="remember">
+<input type="checkbox" id="staticrypt-remember">
+<label for="staticrypt-remember">Remember this device</label>
+</div>
 
-  <script src="staticrypt.js"></script>
+<button type="submit">Access Protocols</button>
 
-  <script>
-    const passwordInput = document.getElementById("staticrypt-password");
-    const togglePasswordBtn = document.getElementById("toggle-password");
-    const rememberMeCheckbox = document.getElementById("remember-me");
-    const form = document.getElementById("staticrypt-form");
-    const errorBox = document.getElementById("staticrypt-error");
+<div id="staticrypt-error"></div>
 
-    togglePasswordBtn.addEventListener("click", function () {
-      const isHidden = passwordInput.type === "password";
-      passwordInput.type = isHidden ? "text" : "password";
-      togglePasswordBtn.textContent = isHidden ? "Hide" : "Show";
-    });
+</form>
 
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-      errorBox.textContent = "";
+<div class="footer">
+Faraone Lab & CTRIC
+</div>
 
-      const password = passwordInput.value;
-      const remember = rememberMeCheckbox.checked;
+</div>
 
-      try {
-        if (typeof handleDecryptionOfPage === "function") {
-          await handleDecryptionOfPage(password, remember);
-        } else if (typeof staticryptDecrypt === "function") {
-          await staticryptDecrypt(password, remember);
-        } else {
-          errorBox.textContent = "Staticrypt script not loaded correctly.";
-        }
-      } catch (e) {
-        errorBox.textContent = "Incorrect password.";
-      }
-    });
-  </script>
+<script>
+
+function togglePassword(){
+const p=document.getElementById("staticrypt-password");
+p.type=p.type==="password"?"text":"password";
+}
+
+</script>
+
+{{staticrypt_script}}
+
 </body>
 </html>
