@@ -1,9 +1,25 @@
-.Rproj.user
+# RStudio
+.Rproj.user/
 .Rhistory
 .RData
 .Ruserdata
 
-/.quarto/
+# Quarto
+.quarto/
 **/*.quarto_ipynb
-/_site/
+_site/
+
+# Node
 node_modules/
+
+# renv
+renv/library/
+renv/staging/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+*.tmp
+*.temp

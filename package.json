@@ -1,12 +1,7 @@
 {
-  "name": "quarto-staticrypt-site",
+  "name": "faraone-lab-protocols",
   "private": true,
-  "scripts": {
-    "build": "quarto render",
-    "protect": "npx staticrypt _site/* -r -d _site --config false",
-    "build:protected": "quarto render && npx staticrypt _site/* -r -d _site --config false"
-  },
   "devDependencies": {
-    "staticrypt": "^3.5.2"
+    "staticrypt": "^3.5.3"
   }
 }
