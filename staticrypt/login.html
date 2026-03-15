@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #0b3d91, #1b6ec2);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      padding: 24px;
+    }
+
+    .login-container {
+      background: white;
+      padding: 42px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      width: 420px;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .logo {
+      width: 120px;
+      max-width: 100%;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 10px 0 10px 0;
+      font-size: 28px;
+      color: #0b3d91;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 22px;
+      line-height: 1.45;
+      font-size: 15px;
+    }
+
+    .password-wrap {
+      position: relative;
+      margin-top: 10px;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 48px 14px 14px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    input[type="password"]:focus,
+    input[type="text"]:focus {
+      border-color: #1b6ec2;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      color: #1b6ec2;
+      font-weight: 600;
+      padding: 0;
+    }
+
+    .remember-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #444;
+      text-align: left;
+    }
+
+    .remember-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      accent-color: #1b6ec2;
+    }
+
+    button.primary {
+      margin-top: 18px;
+      width: 100%;
+      padding: 14px;
+      background: #1b6ec2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button.primary:hover {
+      background: #0b3d91;
+    }
+
+    #staticrypt-error {
+      color: #c62828;
+      margin-top: 14px;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <img src="logo.png" class="logo" alt="Faraone Lab logo">
+
+    <h1>Faraone Lab Protocols</h1>
+
+    <p class="subtitle">
+      Internal research protocols and documentation.<br>
+      Enter the password provided by the lab.
+    </p>
+
+    <form id="staticrypt-form">
+      <div class="password-wrap">
+        <input id="staticrypt-password" type="password" placeholder="Password" autocomplete="current-password">
+        <button type="button" class="toggle-password" id="toggle-password">Show</button>
+      </div>
+
+      <label class="remember-row" for="remember-me">
+        <input id="remember-me" type="checkbox" checked>
+        <span>Remember this device</span>
+      </label>
+
+      <button type="submit" class="primary">Access Protocols</button>
+    </form>
+
+    <div id="staticrypt-error"></div>
+
+    <div class="footer">
+      Faraone Lab &amp; CTRIC
+    </div>
+  </div>
+
+  <script src="staticrypt.js"></script>
+
+  <script>
+    const passwordInput = document.getElementById("staticrypt-password");
+    const togglePasswordBtn = document.getElementById("toggle-password");
+    const rememberMeCheckbox = document.getElementById("remember-me");
+    const form = document.getElementById("staticrypt-form");
+    const errorBox = document.getElementById("staticrypt-error");
+
+    togglePasswordBtn.addEventListener("click", function () {
+      const isHidden = passwordInput.type === "password";
+      passwordInput.type = isHidden ? "text" : "password";
+      togglePasswordBtn.textContent = isHidden ? "Hide" : "Show";
+    });
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      errorBox.textContent = "";
+
+      const password = passwordInput.value;
+      const remember = rememberMeCheckbox.checked;
+
+      try {
+        if (typeof handleDecryptionOfPage === "function") {
+          await handleDecryptionOfPage(password, remember);
+        } else if (typeof staticryptDecrypt === "function") {
+          await staticryptDecrypt(password, remember);
+        } else {
+          errorBox.textContent = "Staticrypt script not loaded correctly.";
+        }
+      } catch (e) {
+        errorBox.textContent = "Incorrect password.";
+      }
+    });
+  </script>
+</body>
+</html>
