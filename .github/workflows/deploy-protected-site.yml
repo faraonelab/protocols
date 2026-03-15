@@ -58,11 +58,19 @@ jobs:
       - name: Protect homepage with Staticrypt
         env:
           STATICRYPT_PASSWORD: ${{ secrets.STATICRYPT_PASSWORD }}
+          STATICRYPT_SALT: ${{ secrets.STATICRYPT_SALT }}
         run: |
           npx staticrypt _site/index.html \
             -d _site \
-            --template staticrypt/login.html \
-            --title "Faraone Lab Protocols"
+            --salt "$STATICRYPT_SALT" \
+            --remember 30 \
+            --template-title "Faraone Lab Protocols" \
+            --template-instructions "Enter the password provided by the lab." \
+            --template-button "Access Protocols" \
+            --template-placeholder "Password" \
+            --template-remember "Remember this device" \
+            --template-toggle-hide "Hide password" \
+            --template-toggle-show "Show password"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
