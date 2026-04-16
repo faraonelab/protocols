@@ -1,0 +1,313 @@
+---
+title: Tick Sample Reception, DNA Extraction, PCR Tracking, and Storage Management
+author: Luís Adriano Anholeto
+date: "2026-03-21"
+version: 1.0
+---
+
+::: callout-important
+# Safety Requirements
+
+-   Wear **gloves, lab coat, and safety goggles** when handling tick samples or DNA extracts.
+-   Treat all biological material as **potentially infectious**.
+-   Perform DNA extraction and PCR setup using **standard molecular biology contamination control procedures**.
+-   Separate **pre-PCR and post-PCR areas** whenever possible.
+-   Disinfect work surfaces using **70% ethanol or appropriate disinfectant** before and after work.
+:::
+
+# Purpose
+
+This protocol describes the **standard procedure for tracking tick samples from reception through DNA extraction, PCR analysis, reporting, and storage** using the laboratory Excel tracking template.
+
+The system ensures:
+
+-   Complete **traceability of samples**
+-   Documentation of **laboratory workflow**
+-   Standardized **sample identification**
+-   Reliable **data management for tick pathogen testing**
+
+# Scope
+
+This protocol applies to all laboratory personnel working with:
+
+-   Tick surveillance samples
+-   Tick pathogen screening projects
+-   Experimental tick infection studies
+-   Molecular detection of tick-borne pathogens
+
+# Roles and Responsibilities
+
+## Principal Investigator
+
+-   Oversees implementation of the tracking system.
+-   Ensures compliance with laboratory data management policies.
+
+## Laboratory Personnel
+
+-   Record all steps of sample processing.
+-   Maintain accurate data entry in the Excel template.
+-   Ensure sample IDs remain consistent throughout the workflow.
+
+## Laboratory Manager
+
+-   Maintains the tracking template.
+-   Performs regular data backup.
+-   Monitors freezer inventory and sample retention.
+
+# Definitions
+
+**Submission ID**
+
+Unique identifier assigned to each incoming batch of samples.
+
+**Tick ID**
+
+Unique identifier assigned to each individual tick specimen.
+
+**DNA Extract ID**
+
+Identifier assigned to DNA obtained from a specific tick specimen.
+
+**PCR Event**
+
+A molecular assay performed on a DNA extract.
+
+**Parent ID**
+
+Reference identifier linking derived samples to the original specimen.
+
+# Overview of the Tracking System
+
+The Excel template contains the following sheets:
+
+| Sheet       | Purpose                     |
+|-------------|-----------------------------|
+| submissions | Records sample reception    |
+| ticks       | Records tick metadata       |
+| extractions | Records DNA extraction      |
+| pcr_runs    | Records PCR reactions       |
+| reports     | Records interpreted results |
+| storage     | Records freezer storage     |
+
+Each sheet is connected through **unique identifiers**.
+
+Example sample lineage:
+
+Submission → Tick → DNA Extract → PCR Run → Result → Storage
+
+# Sample Identification System
+
+Use the following naming structure.
+
+Example:
+
+Submission ID\
+`TTL26-0012`
+
+Tick ID\
+`TTL26-0012-T01`
+
+DNA Extract\
+`TTL26-0012-T01-D1`
+
+PCR Event\
+`PCR-2026-03-21-Plate01-A03`
+
+This system ensures **traceability of every sample component**.
+
+# Procedure
+
+## 1 Sample Reception
+
+Record all incoming samples in the **submissions sheet**.
+
+Required fields:
+
+-   submission_id
+-   date_received
+-   received_by
+-   submitter_name
+-   project_or_study
+-   sample_count
+-   package_condition
+-   cold_chain_status
+-   acceptance_status
+
+Acceptance status options:
+
+-   accepted
+-   rejected
+-   pending
+
+If rejected, document the reason.
+
+------------------------------------------------------------------------
+
+## 2 Tick Registration
+
+Each tick must be entered in the **ticks sheet**.
+
+Required fields:
+
+-   tick_id
+-   submission_id
+-   specimen_label
+-   species
+-   life_stage
+-   sex
+-   host
+-   collection_date
+-   collection_location
+
+Update **sample_status** as the specimen moves through the workflow.
+
+Typical workflow status:
+
+-   logged
+-   identified
+-   queued for extraction
+-   extracted
+-   completed
+
+------------------------------------------------------------------------
+
+## 3 DNA Extraction
+
+Record all extractions in the **extractions sheet**.
+
+Required fields:
+
+-   dna_extract_id
+-   tick_id
+-   extraction_date
+-   operator
+-   extraction_method_or_kit
+-   elution_volume_uL
+-   dna_concentration_ng_uL
+-   qc_status
+
+QC status options:
+
+-   pass
+-   fail
+-   repeat
+
+Document storage location immediately after extraction.
+
+------------------------------------------------------------------------
+
+## 4 PCR Testing
+
+Record PCR reactions in the **pcr_runs sheet**.
+
+Required fields:
+
+-   pcr_event_id
+-   dna_extract_id
+-   assay_target
+-   plate_id
+-   well
+-   pcr_date
+-   operator
+-   cq_ct_value
+-   control_status
+-   interpretation
+
+Interpretation options:
+
+-   positive
+-   negative
+-   inconclusive
+-   repeat
+
+Verify that **controls are valid before interpreting results**.
+
+------------------------------------------------------------------------
+
+## 5 Result Reporting
+
+Record interpreted results in the **reports sheet**.
+
+Required fields:
+
+-   report_id
+-   tick_id
+-   dna_extract_id
+-   target
+-   final_result
+-   reviewed_by
+-   report_date
+
+Ensure a **second reviewer confirms the result** before release.
+
+------------------------------------------------------------------------
+
+## 6 Sample Storage
+
+Track all stored materials in the **storage sheet**.
+
+Items may include:
+
+-   whole tick specimens
+-   DNA extracts
+-   PCR products
+-   slides
+
+Required fields:
+
+-   stored_item_id
+-   item_type
+-   parent_id
+-   temperature
+-   freezer
+-   rack
+-   box
+-   position
+-   stored_date
+
+Temperature options:
+
+-   room_temp
+-   4C
+-   -20C
+-   -80C
+
+------------------------------------------------------------------------
+
+# Data Integrity
+
+To maintain reliable records:
+
+-   Never delete rows containing historical data.
+-   Correct errors by adding notes rather than removing entries.
+-   Maintain consistent identifiers.
+-   Back up the Excel file regularly.
+
+------------------------------------------------------------------------
+
+# Storage and Retention
+
+Suggested retention guidelines:
+
+| Material          | Storage                   |
+|-------------------|---------------------------|
+| Whole ticks       | Room temp or 4 °C         |
+| DNA extracts      | -20 °C or -80 °C          |
+| PCR products      | Separate post-PCR storage |
+| Voucher specimens | Long-term archive         |
+
+Follow laboratory policies for **retention and disposal**.
+
+------------------------------------------------------------------------
+
+# Revision History
+
+| Version | Date       | Author         | Description |
+|---------|------------|----------------|-------------|
+| 1.0     | 2026-03-21 | L. A. Anholeto | Initial SOP |
+
+<button onclick="window.print()" class="print-button" title="Print Protocol">
+
+<i class="bi bi-printer"></i>
+
+</button>
