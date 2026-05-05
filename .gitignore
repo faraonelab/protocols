@@ -24,3 +24,4 @@ renv/staging/
 *.tmp
 *.temp
 /.quarto/
+.positai
